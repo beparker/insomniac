@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Insomniac</string>
+    <string name="notification_channel">Insomniac</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="app_watch_service">App Watch Service</string>
+</resources>
