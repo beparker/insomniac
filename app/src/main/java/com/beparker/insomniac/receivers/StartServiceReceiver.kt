@@ -10,7 +10,7 @@ import org.jetbrains.anko.intentFor
 class StartServiceReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (context != null && (intent?.action == Intent.ACTION_BOOT_COMPLETED || intent?.action == Intent.ACTION_MY_PACKAGE_REPLACED )) {
+        if (context != null && (intent?.action == Intent.ACTION_BOOT_COMPLETED || intent?.action == Intent.ACTION_MY_PACKAGE_REPLACED)) {
             ContextCompat.startForegroundService(context, context.intentFor<AppMonitorService>())
         }
     }

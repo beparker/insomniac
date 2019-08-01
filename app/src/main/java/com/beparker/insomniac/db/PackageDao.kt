@@ -2,6 +2,7 @@ package com.beparker.insomniac.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.reactivex.Completable
 
 @Dao
 interface PackageDao {
@@ -15,11 +16,11 @@ interface PackageDao {
     fun insertAll(pkgs: List<Package>)
 
     @Delete
-    fun delete(pkg: Package)
+    fun delete(pkg: Package): Completable
 
     @Query("DELETE FROM package WHERE name = :name")
     fun delete(name: String)
 
     @Update
-    fun update(pkg: Package)
+    fun update(pkg: Package): Completable
 }

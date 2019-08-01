@@ -14,7 +14,6 @@ import com.beparker.insomniac.R
 import com.beparker.insomniac.addTo
 import com.beparker.insomniac.db.Package
 import com.beparker.insomniac.packageDatabase
-import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -44,19 +43,15 @@ class PackageRecyclerViewAdapter(
             val icon = holder.imageView.context.packageManager.getApplicationIcon(item.name)
             holder.imageView.setImageDrawable(icon)
         } catch (e: PackageManager.NameNotFoundException) {
-            Completable.fromAction {
-                packageDatabase.packageDao().delete(item)
-            }
+            packageDatabase.packageDao().delete(item)
                 .subscribeOn(Schedulers.io())
                 .subscribe().addTo(compositeDisposable)
         }
 
         with(holder.checkBox) {
             setOnCheckedChangeListener { _, isChecked ->
-                Completable.fromAction {
-                    item.enabled = isChecked
-                    packageDatabase.packageDao().update(item)
-                }
+                item.enabled = isChecked
+                packageDatabase.packageDao().update(item)
                     .subscribeOn(Schedulers.io())
                     .subscribe()
                     .addTo(compositeDisposable)
